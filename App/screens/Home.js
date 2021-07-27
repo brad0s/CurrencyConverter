@@ -7,8 +7,11 @@ import {
   Dimensions,
   Text,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { format } from "date-fns";
+import { Entypo } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import colors from "../constants/colors";
 import { ConversionInput } from "../components/ConversionInput";
@@ -50,9 +53,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: "center",
   },
+  header: {
+    alignItems: "flex-end",
+    marginHorizontal: 10,
+  },
 });
 
-export default function Home() {
+export default ({ navigation }) => {
   const baseCurrency = "USD";
   const quoteCurrency = "GBP";
   const conversionRate = 0.7235;
@@ -60,25 +67,17 @@ export default function Home() {
 
   const [scrollEnabled, setScrollEnabled] = useState(false);
 
-  // useEffect(() => {
-  //   const showListener = Keyboard.addListener("keyboardDidShow", () => {
-  //     setScrollEnabled(true); // when keyboard shows, allow scroll
-  //   });
-
-  //   const hideListener = Keyboard.addListener("keyboardDidHide", () => {
-  //     setScrollEnabled(false); // when keyboard hides, don't allow scroll
-  //   });
-
-  //   return () => {
-  //     showListener.remove(); // when screen is no longer focused, remove listener
-  //     hideListener.remove();
-  //   };
-  // }, []);
-
   return (
     <View style={styles.container}>
       <ScrollView scrollEnabled={scrollEnabled}>
         <StatusBar barStyle="light-content" backgroundColor={colors.blue} />
+
+        <SafeAreaView style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.push("Options")}>
+            <Entypo name="cog" size={32} color={colors.white} />
+          </TouchableOpacity>
+        </SafeAreaView>
+
         <View style={styles.content}>
           <View style={styles.logoContainer}>
             <Image
@@ -127,4 +126,4 @@ export default function Home() {
       </ScrollView>
     </View>
   );
-}
+};

@@ -1,5 +1,11 @@
 import React from "react";
-import { SafeAreaView, ScrollView, Linking, Alert } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Linking,
+  Alert,
+  StatusBar,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
 import colors from "../constants/colors";
@@ -11,9 +17,10 @@ const openUrl = (url) => {
   });
 };
 
-export default function Options() {
+export default () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
       {/* flex: 1 makes the safearea take up the whole screen so the scrollview doesn't get cut off */}
       <ScrollView>
         <RowItem
@@ -54,4 +61,4 @@ export default function Options() {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
